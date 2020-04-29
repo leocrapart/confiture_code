@@ -62,7 +62,7 @@ app.post("/switch_state", (req, res) => {
     const file = edit_json(products_file_path, {autosave: true})
     const activity = products[product_type][id].active
     file.set(`${product_type}.${id}.active`, !activity)
-    res.redirect("/")
+    res.redirect("/stock")
 })
 
 app.post("/delete", (req, res) => {
@@ -70,7 +70,7 @@ app.post("/delete", (req, res) => {
     const product_type = req.body.product_type
     const file = edit_json(products_file_path, {autosave: true})
     file.unset(`${product_type}.${id}`)
-    res.redirect("/")
+    res.redirect("/stock")
 })
 
 app.get("/stock", (req, res) => {
