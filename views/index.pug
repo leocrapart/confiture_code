@@ -1,0 +1,29 @@
+extends default
+
+block body
+    div.jumbotron.text-center
+        h1 Valerie confiture
+    div.container
+        p Oyez oyez braves gens
+        p Bienvenue sur le site des confitures artisanales de Valerie
+        p Les confitures qui vont vous faire prendre du poids
+    div.row.m-3
+        div.col
+            h2 Nos confitures
+    div.row.m-3
+        for confiture in confitures
+            if confiture.active
+                div.col-md-2.col-sm-3.col-6.my-1
+                    a(href=`/confiture?id=${confiture.id}`)
+                        img.rounded.img-fluid(src=`/img/${confiture.img_src}`).mx-3
+
+    div.row.m-3
+        div.col-
+            h2 Nos confiseries
+    div.row.m-3
+        for confiserie in confiseries
+            if confiserie.active
+                div.col-md-2.col-sm-3.col-6.my-1
+                    a(href=`/confiserie?id=${confiserie.id}`)
+                        img.rounded.img-fluid(src=`/img/${confiserie.img_src}`).mx-3.mb-5
+                    

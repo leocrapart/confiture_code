@@ -1,0 +1,138 @@
+doctype html
+mixin navbar
+    nav.navbar.bg-primary.navbar-expand-sm.navbar-dark.fixed-top
+        a(href="/").navbar-brand #ValerieConfiture
+
+        button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar")
+            span(class="navbar-toggler-icon")
+        div.collapse.navbar-collapse#collapsibleNavbar
+            ul.navbar-nav
+                li.nav-item
+                    a(href="/confiture").nav-link Confitures
+                li.nav-item
+                    a(href="/confiserie").nav-link Confiseries
+                li.nav-item
+                    a(href="/contact").nav-link Contact
+                li.nav-item
+                    a(href="/reseau").nav-link Reseau
+                li.nav-item
+                    a(href="/upload").nav-link Upload
+                li.nav-item
+                    a(href="/stock").nav-link Stock
+
+mixin footer
+    div.container-fluid.bg-secondary.fixed-bottom
+        div.row.text-light.p-3
+            div.col-sm-4 valerie inc
+            div.col-sm-4.text-sm-center Gaujac 30330
+            div.col-sm-4.text-sm-right email : valerie.confiture@gmail.com
+mixin money_calc(product_price)
+    script.
+        $(document).ready(function(){
+          $("#plus").on("click", function() {
+            var value = Number($("#counter")[0].innerHTML);
+            $("#counter")[0].innerHTML = value +1;
+            refresh_price(#{product_price});
+            
+            });
+          });
+          
+        $(document).ready(function(){
+          $("#minus").on("click", function() {
+            var value = Number($("#counter")[0].innerHTML);
+            if(value > 1) {
+                $("#counter")[0].innerHTML = value -1;
+                refresh_price(#{product_price})
+            }
+            
+            console.log(value);
+            });
+          });
+          
+          function refresh_price(product_price) {
+            const price_item = $("#price")[0].innerHTML;
+            const price_string = price_item.slice(0, price_item.length -2);
+            const price = Number(price_string)
+            const number_of_items  = Number($("#counter")[0].innerHTML)
+            $("#price")[0].innerHTML = `${(product_price * number_of_items).toFixed(2)} $`
+          }
+
+mixin page_produit2(titre, img_path, prix, description, composition)
+    div.jumbotron.text-center #{titre}
+    
+    div.container-fluid
+        div.row.justify-content-center
+            div.col-sm
+                img.rounded(src=`${img_path}`)
+            div.col-sm
+                div.row.mb-3
+                    div.col.text-center.border#price #{prix} $
+                    
+                div.row
+                    div.col
+                        div.d-flex.pl-2
+                            button.btn.btn-danger#minus -
+                            div.px-3.pb-0.mb-0
+                                p.m-0.p-0.pt-2#counter 1
+                            button.btn.btn-success#plus +
+            div.col-sm
+                div.row
+                    div.col
+                        p=description
+                div.row.mt-4
+                    div.col
+                        h3 Composition
+                div.row
+                    div.col
+                        p=composition
+mixin page_produit(titre, img_path, prix, description, composition)
+    div.jumbotron.text-center
+        h2=titre
+        
+    div.container-fluid
+        div.row
+            div.col-md.col-lg-4
+                div.row
+                    div.col.text-center
+                        img.rounded.img-fluid(src=`${img_path}`)
+                div.row
+                    div.col.text-center.my-3
+                        button.btn.btn-secondary.mr-1 230g
+                        button.btn.btn-secondary 340g
+                div.row.text-center.no-gutters
+                    div.col.text-right
+                        button.btn.btn-danger#minus -
+                    div.col.px-n5
+                        p#counter 1
+                    div.col.text-left
+                        button.btn.btn-success#plus +
+                div.row
+                    div.col.text-center
+                        p#price #{prix} €
+
+            div.col-md.col-lg-8
+                h3 Description
+                p=description
+                h3 Composition
+                p=composition
+                
+        
+    
+html(lang="en")
+    head
+        block head
+            title Valerie Confiture
+            meta(charset="utf-8")
+            meta(name="viewport" content="width=device-width, initial-scale=1")
+            link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+            script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+            script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+            script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
+    body
+        +navbar
+        div.container.my-4.text-white 0
+        
+        block body
+        div.container.text-white.my-5 .
+        div.container.text-white.my-5 .
+        +footer

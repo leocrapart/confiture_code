@@ -1,0 +1,20 @@
+extends default
+
+block body
+    div.jumbotron.text-center
+        h2 Nos confiseries
+        
+    
+    div.container-fluid       
+        div.row.align-items-end
+            for confiserie in confiseries
+                if confiserie.active
+                    div.col-md-2.col-sm-3.col-6.my-1
+                        div.row
+                            div.col.d-flex.justify-content-center
+                                a(href=`/confiserie?id=${confiserie.id}`)
+                                    img.rounded.img-fluid(src=`/img/${confiserie.img_src}`)
+                        div.row
+                            div.col.d-flex.justify-content-center.my-2
+                                a(href=`/confiserie?id=${confiserie.id}`)
+                                    button.btn.btn-outline-danger En savoir plus

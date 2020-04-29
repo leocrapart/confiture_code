@@ -1,0 +1,54 @@
+extends default
+
+block body
+    div.container
+        form(method="POST" action="/upload_img" enctype="multipart/form-data")
+            input(type="file" name="upload" multiple)
+            input(type="submit" value="upload")
+        br
+    div.container
+        form(action="/upload_product" method="post")
+            label.mr-3(for="product_type") Type
+            select(name="product_type" id="product_type")
+                option confiture
+                option confiserie
+            br
+            label.mr-3(for="nom") Nom 
+            input(type="text" id="nom" name="nom" placeholder="Confiture de fraise")
+            br
+            label.mr-3(for="id") ID  
+            input(type="text" id="id" name="id" placeholder="fraise")
+            br
+            label.mr-3(for="prix") Prix 
+            input(type="text" id="prix" name="prix" placeholder="5.15")
+            br
+            label.mr-3(for="img_src") Nom du fichier image 
+            input(type="text" id="img_src" name="img_src" placeholder="confiture_de_fraise.jpg")
+            br
+            label.mr-3(for="description") Description
+            input(type="text" id="description" name="description" placeholder="Confiture artisanale ...")
+            br
+            label.mr-3(for="description") Composition
+            input(type="text" id="composition" name="composition" placeholder="60% de fruits frais ...")
+            br
+            label.mr-3(for="product_type") Poids
+            select(name="poids1" id="poids1")
+                option 0g
+                option 340g
+                option 240g
+                option 230g
+                
+            select(name="poids2" id="poids2")
+                option 0g
+                option 340g
+                option 240g
+                option 230g
+            select(name="poids3" id="poids3")
+                option 0g
+                option 340g
+                option 240g
+                option 230g
+                
+            br
+            br
+            input(type="submit" value="Submit")

@@ -1,0 +1,21 @@
+extends default
+
+block body
+    div.jumbotron.text-center
+        h2 Nos confitures
+        
+    
+    div.container-fluid       
+        div.row.align-items-end
+            for confiture in confitures
+                if confiture.active
+                    div.col-md-2.col-sm-3.col-6.my-1
+                        div.row
+                            div.col.d-flex.justify-content-center
+                                a(href=`/confiture?id=${confiture.id}`)
+                                    img.rounded.img-fluid(src=`/img/${confiture.img_src}`)
+                        div.row
+                            div.col.d-flex.justify-content-center.my-2
+                                a(href=`/confiture?id=${confiture.id}`)
+                                    button.btn.btn-outline-danger En savoir plus
+                

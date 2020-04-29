@@ -1,0 +1,13 @@
+extends default
+
+block body
+    - produit = confiture.nom
+    - img_path = `/img/${confiture.img_src}`
+    - prix = confiture.prix
+    - description = confiture.description
+    - composition = confiture.composition
+    
+    +page_produit(produit, img_path, prix, description, composition)
+    
+    +money_calc(prix)
+          

@@ -1,0 +1,81 @@
+extends default
+
+block body
+    div.container
+        p.alert.alert-info Cette page est destinée à etre protegée par id/mot de passe
+    div.container-fluid.mt-3
+        input.form-control#myInput(type="text" placeholder="Search..")
+        br
+
+        table.table.table-bordered.table-striped
+            thead
+                tr
+                    th ID
+                    th Nom
+                    th Prix
+                    th Image
+                    th Description
+                    th Composition
+                    th Poids
+                    th Quantité
+                    th On/off
+                    th Supprimer
+            tbody#myTable
+
+                for confiture in confitures
+                    tr
+                        td
+                            a(href=`/confiture?id=${confiture.id}`) #{confiture.id}
+                        td=confiture.nom
+                        td=confiture.prix
+                        td 
+                            a(href=`/img/${confiture.img_src}`) #{confiture.img_src}
+                        
+                        td=confiture.description
+                        td=confiture.composition
+                        td #{confiture.poids.poids1}, #{confiture.poids.poids2}, #{confiture.poids.poids3}
+                        td=confiture.quantité
+                        td
+                            form(action="/switch_state" method="post")
+                                input(type="hidden" name="product_type" value="confiture")
+                                input(type="hidden" name="id" value=`${confiture.id}`)
+                                input(type="submit" value=`${confiture.active?"On":"Off"}`).btn.btn-warning
+                        td
+                            form(action="/delete" method="post")
+                                input(type="hidden" name="product_type" value="confiture")
+                                input(type="hidden" name="id" value=`${confiture.id}`)
+                                input(type="submit" value="Supprimer").btn.btn-danger
+                            
+                for confiserie in confiseries
+                    tr
+                        td
+                            a(href=`/confiserie?id=${confiserie.id}`) #{confiserie.id}
+                        td=confiserie.nom
+                        td=confiserie.prix
+                        td 
+                            a(href=`/img/${confiserie.img_src}`) #{confiserie.img_src}
+                        td=confiserie.description
+                        td=confiserie.composition
+                        td #{confiserie.poids.poids1}, #{confiserie.poids.poids2}, #{confiserie.poids.poids3}
+                        td=confiserie.quantité
+                        td
+                            form(action="/switch_state" method="post")
+                                input(type="hidden" name="product_type" value="confiserie")
+                                input(type="hidden" name="id" value=`${confiserie.id}`)
+                                input(type="submit" value=`${confiserie.active?"On":"Off"}`).btn.btn-warning
+                        td
+                            form(action="/delete" method="post")
+                                input(type="hidden" name="product_type" value="confiserie")
+                                input(type="hidden" name="id" value=`${confiserie.id}`)
+                                input(type="submit" value="Supprimer").btn.btn-danger
+                    
+
+    script.
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
