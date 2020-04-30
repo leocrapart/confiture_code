@@ -1,54 +1,85 @@
 extends default
 
 block body
+    div.container.jumbotron.text-center.py-3.my-3
+        h4 Ajouter une image
+        
     div.container
         form(method="POST" action="/upload_img" enctype="multipart/form-data")
-            input(type="file" name="upload" multiple)
-            input(type="submit" value="upload")
-        br
+            div.form-group.form-row
+                label.col-sm-2.col-form-label Image
+                div.col-sm-10
+                    input.btn(type="file" name="upload" multiple)
+                    button.btn.btn-primary(type="submit") Ajouter
+    div.container.text-center(style="background-color:#c5c3c7").py-3.my-2.rounded
+        h4 Ajouter un produit
+        
     div.container
-        form(action="/upload_product" method="post")
-            label.mr-3(for="product_type") Type
-            select(name="product_type" id="product_type")
-                option confiture
-                option confiserie
-            br
-            label.mr-3(for="nom") Nom 
-            input(type="text" id="nom" name="nom" placeholder="Confiture de fraise")
-            br
-            label.mr-3(for="id") ID  
-            input(type="text" id="id" name="id" placeholder="fraise")
-            br
-            label.mr-3(for="prix") Prix 
-            input(type="text" id="prix" name="prix" placeholder="5.15")
-            br
-            label.mr-3(for="img_src") Nom du fichier image 
-            input(type="text" id="img_src" name="img_src" placeholder="confiture_de_fraise.jpg")
-            br
-            label.mr-3(for="description") Description
-            input(type="text" id="description" name="description" placeholder="Confiture artisanale ...")
-            br
-            label.mr-3(for="description") Composition
-            input(type="text" id="composition" name="composition" placeholder="60% de fruits frais ...")
-            br
-            label.mr-3(for="product_type") Poids
-            select(name="poids1" id="poids1")
-                option 0g
-                option 340g
-                option 240g
-                option 230g
+        form(method="POST" action="/upload_product")
+
+            div.form-group.form-row
+                label.col-sm-2.col-form-label(for="type") Type
+                div.col-sm-10
+                    select.form-control(id="type" name="product_type")
+                        option confiture
+                        option confiserie
+            div.form-group.form-row
+                label.col-sm-2.col-form-label(for="nom") Nom
+                div.col-sm-10
+                    input.form-control(type="text" id="nom" name="nom" placeholder="Confiture de Fraise")
+                    
+            div.form-group.form-row
+                label.col-sm-2.col-form-label(for="id") Id
+                div.col-sm-10
+                    input.form-control(type="text" id="id" name="id" placeholder="fraise")
+            
+            div.form-group.form-row
+                label.col-sm-2.col-form-label(for="poids") Poids (g)
+                div.col-sm-4
+                    input.form-control(type="text" id="poids" name="poids1" placeholder="340")
+            
+                label.col-sm-2.col-form-label.text-right(for="prix") Prix (€)
+                div.col-sm-4
+                    input.form-control(type="text" id="prix" name="prix1" placeholder="5.6")
+            
+            div.form-group.form-row
+                label.col-sm-2.col-form-label
+                div.col-sm-4
+                    input.form-control(type="text" name="poids2" placeholder="230")
+            
+                label.col-sm-2.col-form-label
+                div.col-sm-4
+                    input.form-control(type="text" name="prix2" placeholder="3.5")
+            
+            div.form-group.form-row
+                label.col-sm-2.col-form-label
+                div.col-sm-4
+                    input.form-control(type="text" name="poids3")
+            
+                label.col-sm-2.col-form-label
+                div.col-sm-4
+                    input.form-control(type="text" name="prix3")
+                    
+            div.form-group.form-row
+                label.col-sm-2.col-form-label(for="img_src") Nom de l'image
+                div.col-sm-10
+                    input.form-control(type="text" id="img_src" name="img_src" placeholder="confiture_fraise.jpg")
+                                
+                    
+            div.form-group.form-row
+                label.col-sm-2.col-form-label(for="description") Description
+                div.col-sm-10
+                    input.form-control(type="text" id="description" name="description" placeholder="Confiture artisanale, faite maison, cuite en bassine de cuivre avec des fraises...")
+                    
+            div.form-group.form-row
+                label.col-sm-2.col-form-label(for="composition") Composition
+                div.col-sm-10
+                    input.form-control(type="text" id="composition" name="composition" placeholder="60% de fruits frais, 40% de sucre, de la pectine végétale")
+            
                 
-            select(name="poids2" id="poids2")
-                option 0g
-                option 340g
-                option 240g
-                option 230g
-            select(name="poids3" id="poids3")
-                option 0g
-                option 340g
-                option 240g
-                option 230g
-                
-            br
-            br
-            input(type="submit" value="Submit")
+            div.form-group.form-row.text-center
+                div.col-sm-12
+                    button.btn.btn-primary(type="submit") Ajouter
+
+
+

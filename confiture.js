@@ -19,30 +19,38 @@ app.set("views", path.join(__dirname, "views"))
 app.use(body_parser.urlencoded({extended: true}))
 
 app.post("/upload_product", (req, res) => {
-    
+    //DATA
+
     const product_type = req.body.product_type
     const nom = req.body.nom
     const id = req.body.id
-    const prix = Number(req.body.prix)
+    console.log(id)
+    const prix1 = Number(req.body.prix1)
+    const prix2 = Number(req.body.prix2)
+    const prix3 = Number(req.body.prix3)
     const img_src = req.body.img_src
     const description = req.body.description
     const composition = req.body.composition
-    const poids1 = req.body.poids1
-    const poids2 = req.body.poids2
-    const poids3 = req.body.poids3
-    
+    const poids1 = Number(req.body.poids1)
+    const poids2 = Number(req.body.poids2)
+    const poids3 = Number(req.body.poids3)
     const file = edit_json(products_file_path, {autosave: true})
     file.set(`${product_type}.${id}.nom`, nom)
     file.set(`${product_type}.${id}.id`, id)
-    file.set(`${product_type}.${id}.prix`, prix)
     file.set(`${product_type}.${id}.img_src`, img_src)
     file.set(`${product_type}.${id}.description`, description)
     file.set(`${product_type}.${id}.composition`, composition)
     file.set(`${product_type}.${id}.description`, description)
+    file.set(`${product_type}.${id}.prix.prix1`, prix1)
+    file.set(`${product_type}.${id}.prix.prix2`, prix2)
+    file.set(`${product_type}.${id}.prix.prix3`, prix3)
     file.set(`${product_type}.${id}.poids.poids1`, poids1)
     file.set(`${product_type}.${id}.poids.poids2`, poids2)
     file.set(`${product_type}.${id}.poids.poids3`, poids3)
     file.set(`${product_type}.${id}.active`, true)
+    //DATA
+    
+    
     res.redirect("/upload")
 })
 
@@ -119,7 +127,12 @@ app.get("/upload", (req, res) => {
     res.render("upload")
 })
 
+app.get("/connect", (req, res) => {
+    res.render("password")
+} )
+
 app.post('/upload_img', function (req, res){
+    //IMG
     const form = new formidable.IncomingForm();
     const MB = 1024 * 1024
     form.maxFileSize = 10 * MB
@@ -127,13 +140,12 @@ app.post('/upload_img', function (req, res){
 
     form.on('fileBegin', function (name, file){
         file.path = path.join(parent_dirname, "public", "img", file.name)
-        console.log(file.path)
     });
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name)
     });
-
+    //IMG
     res.render("upload");
 });
 

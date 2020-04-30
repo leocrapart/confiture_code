@@ -21,53 +21,43 @@ block body
                     th On/off
                     th Supprimer
             tbody#myTable
-
-                for confiture in confitures
+            - const gamme = [confitures, confiseries]
+            - let types = ["confiture", "confiserie"]
+            - let compteur = -1
+            for produits in gamme
+                - compteur = compteur +1
+                - var type = types[compteur]
+                for produit in produits
                     tr
                         td
-                            a(href=`/confiture?id=${confiture.id}`) #{confiture.id}
-                        td=confiture.nom
-                        td=confiture.prix
+                            a(href=`/produit?id=${produit.id}`) #{produit.id}
+                        td=produit.nom
+                        td #{produit.prix.prix1}, #{produit.prix.prix2}, #{produit.prix.prix3}
                         td 
-                            a(href=`/img/${confiture.img_src}`) #{confiture.img_src}
+                            a(href=`/img/${produit.img_src}`) #{produit.img_src}
                         
-                        td=confiture.description
-                        td=confiture.composition
-                        td #{confiture.poids.poids1}, #{confiture.poids.poids2}, #{confiture.poids.poids3}
-                        td=confiture.quantité
+                        td
+                            form(method="POST" action="/modify_product")
+                                input(type="hidden" name="product_type" value=`${type}`)
+                                input(type="hidden" name="id" value=`${produit.id}`)
+                                textarea.form-control #{produit.description}
+                        td=produit.composition
+                        td #{produit.poids.poids1}, #{produit.poids.poids2}, #{produit.poids.poids3}
+                        td=produit.quantité
                         td
                             form(action="/switch_state" method="post")
-                                input(type="hidden" name="product_type" value="confiture")
-                                input(type="hidden" name="id" value=`${confiture.id}`)
-                                input(type="submit" value=`${confiture.active?"On":"Off"}`).btn.btn-warning
+                                input(type="hidden" name="product_type" value=`${type}`)
+                                input(type="hidden" name="id" value=`${produit.id}`)
+                                if produit.active
+                                    input(type="submit" value=`${produit.active?"On":"Off"}`).btn.btn-success
+                                else
+                                    input(type="submit" value=`${produit.active?"On":"Off"}`).btn.btn-warning
                         td
                             form(action="/delete" method="post")
-                                input(type="hidden" name="product_type" value="confiture")
-                                input(type="hidden" name="id" value=`${confiture.id}`)
+                                input(type="hidden" name="product_type" value=`${type}`)
+                                input(type="hidden" name="id" value=`${produit.id}`)
                                 input(type="submit" value="Supprimer").btn.btn-danger
                             
-                for confiserie in confiseries
-                    tr
-                        td
-                            a(href=`/confiserie?id=${confiserie.id}`) #{confiserie.id}
-                        td=confiserie.nom
-                        td=confiserie.prix
-                        td 
-                            a(href=`/img/${confiserie.img_src}`) #{confiserie.img_src}
-                        td=confiserie.description
-                        td=confiserie.composition
-                        td #{confiserie.poids.poids1}, #{confiserie.poids.poids2}, #{confiserie.poids.poids3}
-                        td=confiserie.quantité
-                        td
-                            form(action="/switch_state" method="post")
-                                input(type="hidden" name="product_type" value="confiserie")
-                                input(type="hidden" name="id" value=`${confiserie.id}`)
-                                input(type="submit" value=`${confiserie.active?"On":"Off"}`).btn.btn-warning
-                        td
-                            form(action="/delete" method="post")
-                                input(type="hidden" name="product_type" value="confiserie")
-                                input(type="hidden" name="id" value=`${confiserie.id}`)
-                                input(type="submit" value="Supprimer").btn.btn-danger
                     
 
     script.
