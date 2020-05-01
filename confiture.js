@@ -40,7 +40,6 @@ app.post("/upload_product", (req, res) => {
     file.set(`${product_type}.${id}.img_src`, img_src)
     file.set(`${product_type}.${id}.description`, description)
     file.set(`${product_type}.${id}.composition`, composition)
-    file.set(`${product_type}.${id}.description`, description)
     file.set(`${product_type}.${id}.prix.prix1`, prix1)
     file.set(`${product_type}.${id}.prix.prix2`, prix2)
     file.set(`${product_type}.${id}.prix.prix3`, prix3)
@@ -54,6 +53,26 @@ app.post("/upload_product", (req, res) => {
     res.redirect("/upload")
 })
 
+app.post("/modify_product", (req, res) => {
+    const file = edit_json(products_file_path, {autosave: true})
+    const product_type = req.body.product_type
+    const id = req.body.id
+    const attributes = ["nom", "id", "img_src", "description", "composition", "prix.prix1", "prix.prix2", "prix.prix3", "poids.poids1", "poids.poids2", "poids.poids3", "quantity"]
+    const new_data = [req.body.nom, req.body.id, req.body.img_src, req.body.description, req.body.composition, Number(req.body.prix1), Number(req.body.prix2), Number(req.body.prix3), Number(req.body.poids1), Number(req.body.poids2), Number(req.body.poids3), req.body.quantity]
+    
+    for(let i=0; i<attributes.length; i++) {
+        const attribute = attributes[i]
+        const new_data_item = new_data[i]
+        console.log(attribute, new_data_item)
+        if ((new_data_item || new_data_item==0) && attribute != "id") {
+            console.log(attribute, new_data_item)
+            console.log(`${product_type}.${id}.${attribute}`)
+            file.set(`${product_type}.${id}.${attribute}`, new_data_item)
+        }
+    }
+    
+    res.redirect("/stock")
+})
 
 //end
 app.get("/", (req, res) => {

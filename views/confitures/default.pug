@@ -1,4 +1,5 @@
 doctype html
+- var icon = "https://raw.githubusercontent.com/twbs/icons/63f714f3eccb0ecc5147fcf49ca7a253acf0d7f1/icons/"
 mixin navbar
     nav.navbar.bg-primary.navbar-expand-sm.navbar-dark.fixed-top
         a(href="/").navbar-brand #ValerieConfiture
@@ -57,35 +58,8 @@ mixin money_calc(product_price)
             $("#price")[0].innerHTML = `${(product_price * number_of_items).toFixed(2)} $`
           }
 
-mixin page_produit2(titre, img_path, prix, description, composition)
-    div.jumbotron.text-center #{titre}
-    
-    div.container-fluid
-        div.row.justify-content-center
-            div.col-sm
-                img.rounded(src=`${img_path}`)
-            div.col-sm
-                div.row.mb-3
-                    div.col.text-center.border#price #{prix} $
-                    
-                div.row
-                    div.col
-                        div.d-flex.pl-2
-                            button.btn.btn-danger#minus -
-                            div.px-3.pb-0.mb-0
-                                p.m-0.p-0.pt-2#counter 1
-                            button.btn.btn-success#plus +
-            div.col-sm
-                div.row
-                    div.col
-                        p=description
-                div.row.mt-4
-                    div.col
-                        h3 Composition
-                div.row
-                    div.col
-                        p=composition
-mixin page_produit(titre, img_path, prix, description, composition)
+
+mixin page_produit(titre, img_path, poids, prix, description, composition)
     div.jumbotron.text-center
         h2=titre
         
@@ -97,8 +71,9 @@ mixin page_produit(titre, img_path, prix, description, composition)
                         img.rounded.img-fluid(src=`${img_path}`)
                 div.row
                     div.col.text-center.my-3
-                        button.btn.btn-secondary.mr-1 230g
-                        button.btn.btn-secondary 340g
+                        button.btn.btn-secondary.mr-1 #{poids.poids1}g
+                        button.btn.btn-secondary #{poids.poids2}g
+                        button.btn.btn-secondary #{poids.poids3}g
                 div.row.text-center.no-gutters
                     div.col.text-right
                         button.btn.btn-danger#minus -
@@ -108,7 +83,7 @@ mixin page_produit(titre, img_path, prix, description, composition)
                         button.btn.btn-success#plus +
                 div.row
                     div.col.text-center
-                        p#price #{prix} €
+                        p#price #{prix.prix1} €
 
             div.col-md.col-lg-8
                 h3 Description

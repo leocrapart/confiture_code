@@ -1,13 +1,14 @@
 extends default
 
 block body
-    - produit = confiserie.nom
-    - img_path = `/img/${confiserie.img_src}`
-    - prix = confiserie.prix
-    - description = confiserie.description
-    - composition = confiserie.compositiob
+    - const produit = confiserie.nom
+    - const img_path = `/img/${confiserie.img_src}`
+    - const poids = confiserie.poids
+    - const prix = confiserie.prix
+    - const description = confiserie.description
+    - const composition = confiserie.compositiob
     
-    +page_produit(produit, img_path, prix, description, composition)
+    +page_produit(produit, img_path, poids, prix, description, composition)
     
-    +money_calc(prix)
+    +money_calc(prix.prix1)
           
