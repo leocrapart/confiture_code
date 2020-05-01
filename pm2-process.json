@@ -1,0 +1,5 @@
+{
+    "script": "confiture_code/confiture.js",
+    "watch": true,
+    "name": "maman"
+}
