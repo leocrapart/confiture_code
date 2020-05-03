@@ -1,0 +1,81 @@
+{
+  "confiture": {
+    "framboise": {
+      "nom": "gegegre",
+      "id": "framboise",
+      "prix": 6,
+      "img_src": "confiture_framboise.jpg",
+      "description": "affrzfz",
+      "composition": "fezfzefzf",
+      "poids": {
+        "poids1": 0,
+        "poids2": 0,
+        "poids3": 0
+      },
+      "active": true
+    },
+    "figues": {
+      "nom": "confiture de figues",
+      "id": "figues",
+      "prix": 5.6,
+      "img_src": "confiture_figues.jpg",
+      "description": "Confiture fauohfregzergzergzerg",
+      "composition": "zergzegezgzergzerg",
+      "poids": {
+        "poids1": 0,
+        "poids2": 0,
+        "poids3": 0
+      },
+      "active": true
+    }
+  },
+  "confiserie": {
+    "pdf": {
+      "nom": "Pate de fruit",
+      "id": "pdf",
+      "prix": 12,
+      "img_src": "pate_de_fruit.jpg",
+      "description": "la sucette qui t'arrache la tete",
+      "composition": "99%",
+      "poids": {
+        "poids1": 0,
+        "poids2": "230g",
+        "poids3": "0g"
+      },
+      "active": true
+    },
+    "tetete": {
+      "nom": "ettee",
+      "id": "tetete",
+      "img_src": "conf.jpg",
+      "description": "la confiture de fraise miam miam goulou goulou",
+      "composition": "100%",
+      "prix": {
+        "prix1": 140,
+        "prix2": 1,
+        "prix3": 0
+      },
+      "poids": {
+        "poids1": 120,
+        "poids2": 0,
+        "poids3": 0
+      },
+      "active": true
+    }
+  },
+  "undefined": {
+    "undefined": {
+      "prix": {
+        "prix1": null,
+        "prix2": null,
+        "prix3": null
+      },
+      "poids": {
+        "poids1": null,
+        "poids2": null,
+        "poids3": null
+      },
+      "active": true
+    }
+  }
+}
