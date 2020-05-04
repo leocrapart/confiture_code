@@ -1,0 +1,22 @@
+{
+  "leocrapart@yahoo.fr": {
+    "email": "leocrapart@yahoo.fr",
+    "password": "leo",
+    "status": "admin"
+  },
+  "crapartenzo@yahoo.fr": {
+    "email": "crapartenzo@yahoo.fr",
+    "password": "enzo",
+    "status": "customer"
+  },
+  "iamgood@ae.fr": {
+    "email": "iamgood@ae.fr",
+    "password": "test",
+    "status": "customer"
+  },
+  "lo@lo": {
+    "email": "lo@lo",
+    "password": "lolo",
+    "status": "customer"
+  }
+}
