@@ -3,21 +3,39 @@ const path = require("path")
 const formidable = require("formidable")
 const body_parser = require("body-parser")
 const edit_json = require("edit-json-file")
+const session = require("express-session")
 
 const parent_dirname = path.dirname(__dirname)
 const products_file_path = path.join(parent_dirname, "database", "products.json")
-console.log(products_file_path)
+const people_file_path = path.join(parent_dirname, "database", "people.json")
+
 const app = express()
 const products = require(products_file_path)
+const people = require(people_file_path)
 
 app.set("view engine", "pug")
 app.use(express.static(path.join(parent_dirname, "public")))
 app.set("views", path.join(__dirname, "views"))
 
+//session
+app.use(session({
+    secret: 'ougzgrz54gze4gze8',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use((req,res,next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 // FORM MANAGE
 app.use(body_parser.urlencoded({extended: true}))
 
+
+app.post("/log-out", (req,res) => {
+    req.session.destroy()
+    res.redirect("/")
+})
 app.post("/upload_product", (req, res) => {
     //DATA
 
@@ -82,6 +100,85 @@ app.get("/", (req, res) => {
     })
 })
 
+app.get("/settings", (req, res) => {
+    res.render("log/settings")
+})
+
+app.get("/sign-in", (req, res) => {
+    res.render("log/sign-in")
+})
+
+app.post("/sign-in", (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+    let error_msg = ""
+    
+    if (people[email].email == email && people[email].password == password) {
+        req.session.loggedIn = true
+        req.session.email = email
+        req.session.password = password
+        req.session.status = people[email].status
+        res.redirect("/")
+    } else {
+        error_msg = "Incorrect Email and/or Password"
+        res.render("sign-in", {
+            alert : {msg : error_msg},
+            data : { email : email}
+        })
+    }
+    
+    
+})
+
+app.get("/sign-up", (req, res) => {
+    res.render("log/sign-up")
+})
+
+app.post("/sign-up", (req, res) => {
+    let error_msg = ""
+    const success_msg = "Successfully registered"
+    const email = req.body.email
+    const password = req.body.password
+    const password_check = req.body.password_check
+    
+    if (password != password_check) {
+        error_msg = "The two password aren't identical"
+        res.send('Incorrect Username and/or Password!')
+        res.render("sign-up", {
+            alert : {msg : error_msg,
+                     status : "error"},
+            data : { email : email}
+        })
+    } else {
+        const file = edit_json(people_file_path, {autosave: true})
+        const escaped_mail = escaped_email(email)
+        file.set(`${escaped_mail}.email`, email)
+        file.set(`${escaped_mail}.password`, password)
+        file.set(`${escaped_mail}.status`, "customer")
+
+        
+        res.render("log/sign-in", {
+            alert : {msg : success_msg,
+                     status : "success"},
+            data : { email : email}
+        })
+    }
+})
+
+const escaped_email = (email) => {
+    let new_email = ""
+    let after_at = false;
+    for (let i=0; i< email.length; i++) {
+        if (email[i] == ".") {
+            new_email += "\\."
+        } else {
+            new_email += email[i]
+        }
+    }
+    return new_email
+}
+
+
 app.post("/switch_state", (req, res) => {
     const id = req.body.id
     const product_type = req.body.product_type
@@ -101,7 +198,7 @@ app.post("/delete", (req, res) => {
 })
 
 app.get("/stock", (req, res) => {
-    res.render("stock", {
+    res.render("admin/stock", {
         confitures: products.confiture,
         confiseries: products.confiserie
     })
@@ -113,7 +210,7 @@ app.get("/contact", (req, res) => {
 
 
 app.get("/reseau", (req, res) => {
-    res.render("reseau")
+    res.render("admin/reseau")
 })
 
 app.get("/confiture", (req, res) => {
@@ -143,12 +240,11 @@ app.get("/confiserie", (req, res) => {
 })
 
 app.get("/upload", (req, res) => {
-    res.render("upload")
+    res.render("admin/upload", {
+        status: req.session.status
+    })
 })
 
-app.get("/connect", (req, res) => {
-    res.render("password")
-} )
 
 app.post('/upload_img', function (req, res){
     //IMG

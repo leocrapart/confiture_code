@@ -1,25 +1,51 @@
 doctype html
-- var icon = "https://raw.githubusercontent.com/twbs/icons/63f714f3eccb0ecc5147fcf49ca7a253acf0d7f1/icons/"
 mixin navbar
     nav.navbar.bg-primary.navbar-expand-sm.navbar-dark.fixed-top
-        a(href="/").navbar-brand #ValerieConfiture
+        a(href="/").navbar-brand 
+            img(src="/img/jam.svg"  width="30" height="30" class="d-inline-block align-top" alt="")
 
         button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar")
             span(class="navbar-toggler-icon")
         div.collapse.navbar-collapse#collapsibleNavbar
-            ul.navbar-nav
+            ul.navbar-nav.mr-auto
                 li.nav-item
                     a(href="/confiture").nav-link Confitures
                 li.nav-item
                     a(href="/confiserie").nav-link Confiseries
                 li.nav-item
                     a(href="/contact").nav-link Contact
-                li.nav-item
-                    a(href="/reseau").nav-link Reseau
-                li.nav-item
-                    a(href="/upload").nav-link Upload
-                li.nav-item
-                    a(href="/stock").nav-link Stock
+                
+                
+            ul.navbar-nav
+                if session.status == "admin"
+                    li.nav-item
+                        a(href="/reseau").nav-link Reseau
+                    li.nav-item
+                        a(href="/upload").nav-link Upload
+                    li.nav-item
+                        a(href="/stock").nav-link Stock
+                if !session.status
+                    li.nav-item
+                        a(href="/sign-in").nav-link Sign in
+                else
+                    a(href="/settings")
+                        li.nav-item
+                            a(href="/settings").nav-link Settings
+                        li.nav-item
+                            a(href="/settings")
+                                img.nav-link(src="/img/settings.svg" width="40" height="40"  alt="")
+                        
+                        
+                        
+            
+            //form.form-inline.my-2.my-lg-0
+                if session.status
+                    button.btn.my-2.my-sm-0(type="submit") #{session.email}
+                else
+                    a(href="/sign-in")
+                        button.btn.my-2.my-sm-0 Sign-in
+            
+
 
 mixin footer
     div.container-fluid.bg-secondary.fixed-bottom
@@ -103,6 +129,8 @@ html(lang="en")
             script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
             script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
             script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
+            link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+
     body
         +navbar
         div.container.my-4.text-white 0

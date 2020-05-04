@@ -1,0 +1,31 @@
+extends ../default
+block body
+    div.container.text-center(style="width:500px")
+        form(method="POST" action="/sign-up")
+            // to style img : find color in hsl,name => hex => filter
+            //hsl,name => hex https://www.w3schools.com/colors/colors_converter.asp
+            //hex => filter https://codepen.io/sosuke/pen/Pjoqqp
+            //red
+            if alert
+                if alert.status == "success"
+                    div.alert.alert-success=alert.msg
+                if alert.status == "error"
+                    div.alert.alert-danger=alert.msg
+
+            i.fa.fa-arrow-circle-o-up(style="font-size:36px")
+            h1.h3.mb-3.font-weight-normal Sign up
+            label(for="inputEmail").sr-only Email adress
+            if data
+                if data.email
+                    input(type="email" id="inputEmail" value=`${data.email}` placeholder=" Email address" name="email" required autofocus).form-control
+            else
+                input(type="email" id="inputEmail" placeholder=" Email address" name="email" required autofocus).form-control
+
+            label(for="inputPassword").sr-only Password
+            input.my-2(type="password" id="inputPassword" placeholder="Password" name="password" required).form-control
+
+            label(for="inputPasswordCheck").sr-only Confirm password
+            input.mb-4(type="password" id="inputPasswordCheck" placeholder="Confirm password" name="password_check" required).form-control
+
+            button.btn.btn-lg.btn-primary.btn-block(type="submit") Sign up
+            p.mt-5.mb-3.text-muted © 2020

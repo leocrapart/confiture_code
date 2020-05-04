@@ -1,0 +1,105 @@
+extends ../default
+
+block body
+    if session.status == "admin"
+        div.container-fluid.mt-3
+            input.form-control#myInput(type="text" placeholder="Search..")
+            br
+
+            table.table.table-bordered.table-striped
+                thead
+                    tr
+                        th ID
+                        th Nom
+                        th Image
+                        th Description
+                        th Composition
+                        th Poids
+                        th Prix
+                        th Quantité
+                        th On/off
+                        th Supprimer
+
+                - const gamme = [confitures, confiseries]
+                - const types = ["confiture", "confiserie"]
+                - let compteur = -1
+                tbody#myTable
+                    for produits in gamme
+                        - compteur = compteur +1
+                        - const type = types[compteur]
+                        for produit in produits
+                            tr
+                                td
+                                    a(href=`/${type}?id=${produit.id}`) #{produit.id}
+                                td
+                                    form(method="POST" action="/modify_product")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        input.form-control(type="text" name="nom" value=`${produit.nom}`) 
+
+                                td
+                                    form(method="POST" action="/modify_product")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        input.form-control(type="text" name="img_src" value=`${produit.img_src}`) 
+                                    a.btn.btn-sm.text-muted(href=`/img/${produit.img_src}`) Voir
+                                td
+                                    form(method="POST" action="/modify_product")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        textarea.form-control(name="description") #{produit.description}
+                                        input.btn.btn-sm.text-muted(type="submit")
+                                td
+                                    form(method="POST" action="/modify_product")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        textarea.form-control(name="composition") #{produit.composition}
+                                        input.btn.btn-sm.text-muted(type="submit")
+                                td
+                                    form(method="POST" action="/modify_product")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        input.form-control.form-control-sm(type="text" name="poids1" value=`${produit.poids.poids1?produit.poids.poids1:0}`)
+                                        input.form-control.form-control-sm(type="text" name="poids2" value=`${produit.poids.poids2?produit.poids.poids2:0}`)
+                                        input.form-control.form-control-sm(type="text" name="poids3" value=`${produit.poids.poids3?produit.poids.poids3:0}`)
+                                        input.btn.btn-sm.text-muted(type="submit")
+
+                                td
+                                    form(method="POST" action="/modify_product")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        input.form-control.form-control-sm(type="text" name="prix1" value=`${produit.prix.prix1?produit.prix.prix1:0}`)
+                                        input.form-control.form-control-sm(type="text" name="prix2" value=`${produit.prix.prix2?produit.prix.prix2:0}`)
+                                        input.form-control.form-control-sm(type="text" name="prix3" value=`${produit.prix.prix3?produit.prix.prix3:0}`)
+                                        input.btn.btn-sm.text-muted(type="submit")
+                                td
+                                    form(method="POST" action="/modify_product")
+                                        input.form-control.form-control-sm(type="hidden" name="product_type" value=`${type}`)
+                                        input.form-control.form-control-sm(type="hidden" name="id" value=`${produit.id}`)
+                                        input.form-control.form-control-sm(type="text" name="quantity" value=`${produit.quantity?produit.quantity:"non défini"}`)
+                                        input.btn.btn-sm.text-muted(type="submit")
+
+                                td
+                                    form(action="/switch_state" method="post")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        if produit.active
+                                            input(type="submit" value=`${produit.active?"On":"Off"}`).btn.btn-success
+                                        else
+                                            input(type="submit" value=`${produit.active?"On":"Off"}`).btn.btn-warning
+                                td
+                                    form(action="/delete" method="post")
+                                        input(type="hidden" name="product_type" value=`${type}`)
+                                        input(type="hidden" name="id" value=`${produit.id}`)
+                                        input(type="submit" value="Supprimer").btn.btn-danger
+                    
+
+    script.
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
