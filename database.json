@@ -1,0 +1,146 @@
+{
+  "users": [
+    {
+      "email": "leocrapart@yahoo.fr",
+      "password": "leo",
+      "status": "admin"
+    },
+    {
+      "email": "crapartenzo@yahoo.fr",
+      "password": "enzo",
+      "status": "customer"
+    },
+    {
+      "email": "leocrapart@yahoo.fr",
+      "password": "leo",
+      "status": "admin"
+    },
+    {
+      "email": "crapartenzo@yahoo.fr",
+      "password": "enzo",
+      "status": "customer"
+    },
+    {
+      "email": "leocr@leo",
+      "password": "leo",
+      "status": "customer"
+    }
+  ],
+  "products": [
+    {
+      "type": "confiture",
+      "nom": "test",
+      "id": "fraise",
+      "prix": {
+        "prix1": 3,
+        "prix2": 2,
+        "prix3": 10
+      },
+      "img_src": "confiture_fraise.jpg",
+      "description": "la confiture de fraise miam miam goulou wouf wouf goulou",
+      "composition": "60% de connerie 39% de fantasme et 1% de vérité",
+      "poids": {
+        "poids1": 240,
+        "poids2": 120,
+        "poids3": 10
+      },
+      "active": true,
+      "quantity": 11
+    },
+    {
+      "type": "confiserie",
+      "nom": "test",
+      "id": "fraisier",
+      "prix": {
+        "prix1": 42,
+        "prix2": 1,
+        "prix3": 0
+      },
+      "img_src": "confiture_fraise.jpg",
+      "description": "la sucette qui t'arrache la tete",
+      "composition": "100% test",
+      "poids": {
+        "poids1": 120,
+        "poids2": 100,
+        "poids3": 0
+      },
+      "active": true
+    },
+    {
+      "type": "confiture",
+      "nom": "confiture de framboise",
+      "id": "framboise",
+      "prix": {
+        "prix1": 6,
+        "prix2": 0,
+        "prix3": 0
+      },
+      "img_src": "confiture_framboise.jpg",
+      "description": "framboisier du congo",
+      "composition": "wowlowowowoowowowowooiwowowoww",
+      "poids": {
+        "poids1": 250,
+        "poids2": 0,
+        "poids3": 0
+      },
+      "active": true
+    },
+    {
+      "type": "confiture",
+      "nom": "banane",
+      "id": "banane_id",
+      "prix": {
+        "prix1": 5.6,
+        "prix2": 0,
+        "prix3": 0
+      },
+      "img_src": "confiture_banane.jpg",
+      "description": "la confiture de banane mangée avec soin",
+      "composition": "60% de banane, 40% de sucre",
+      "poids": {
+        "poids1": 234,
+        "poids2": 0,
+        "poids3": 0
+      },
+      "active": true
+    },
+    {
+      "type": "confiserie",
+      "nom": "Pate de fruit",
+      "id": "pdf",
+      "prix": {
+        "prix1": 3,
+        "prix2": 0,
+        "prix3": 0
+      },
+      "img_src": "pate_de_fruit.jpg",
+      "description": "pate de fruit ",
+      "composition": "60% pate et 40% fruit",
+      "poids": {
+        "poids1": 120,
+        "poids2": 0,
+        "poids3": 0
+      },
+      "active": true
+    },
+    {
+      "type": "confiserie",
+      "nom": "bonbon",
+      "id": "bonbon",
+      "prix": {
+        "prix1": 10,
+        "prix2": 0,
+        "prix3": 0
+      },
+      "img_src": "confiture_fraise.jpg",
+      "description": "la confiture de fraise miam miam goulou goulou",
+      "composition": "100%",
+      "poids": {
+        "poids1": 1000,
+        "poids2": 0,
+        "poids3": 0
+      },
+      "active": true
+    }
+  ]
+}
