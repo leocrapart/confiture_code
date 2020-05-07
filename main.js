@@ -26,7 +26,10 @@ app.use((req,res,next) => {
 const low = require("lowdb")
 const FileSync = require("lowdb/adapters/FileSync")
 
-const adapter = new FileSync("../database/database.json")
+
+const database_path = path.join(parent_dirname, "database", "database.json")
+
+const adapter = new FileSync(database_path)
 const db = low(adapter)
 
  //init db
@@ -52,7 +55,6 @@ const users = db.get("users")
 const data_types = db.get("data_types")
                     .value()
 
-const test = []
     
 
 app.post("/log-out", (req,res) => {
